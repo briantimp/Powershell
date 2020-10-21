@@ -1,0 +1,20 @@
+param(
+# Enable or disable GPU acceleration
+[boolean]$disableGpu=$True,
+# Fully close Teams App
+[boolean]$runningOnClose=$False
+)
+
+# Get Teams Configuration
+$FileContent=Get-Content -Path "$ENV:APPDATA\Microsoft\Teams\desktop-config.json"
+
+# Convert file content from JSON format to PowerShell object
+$JSONObject=ConvertFrom-Json -InputObject $FileContent
+
+# Update Object settings
+$JSONObject.appPreferenceSettings.disableGpu=$disableGpu
+$JSONObject.appPreferenceSettings.runningOnClose=$runningOnClose
+$NewFileContent=$JSONObject | ConvertTo-Json
+
+# Update configuration in file
+$NewFileContent | Set-Content -Path "$ENV:APPDATA\Microsoft\Teams\desktop-config.json" 

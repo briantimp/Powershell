@@ -1,4 +1,4 @@
-# A collection of nice powershell scripts
+# A collection of powershell scripts
 
 PowerShell scripts and functions
 
